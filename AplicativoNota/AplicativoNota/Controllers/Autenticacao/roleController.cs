@@ -21,8 +21,8 @@ namespace AplicativoNota.Controllers.Autenticacao
             _userManager = userManager;
         }
         [HttpGet]
-        //[AllowAnonymous]
-        [Authorize(Roles = "ADMIN")]
+        [AllowAnonymous]
+        //[Authorize(Roles = "ADMIN")]
         public IActionResult Get()
         {
             return Ok(new

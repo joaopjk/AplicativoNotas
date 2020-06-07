@@ -13,6 +13,14 @@ namespace Data.Repository
         IdentityRoleClaim<int>,IdentityUserToken<int>>
     {
         public Context(DbContextOptions<Context> options) : base(options) { }
+        public DbSet<Aluno> Aluno { get; set; }
+        public DbSet<Professor> Professor { get; set; }
+        public DbSet<Matricula> Matricula { get; set; }
+        public DbSet<Lancamentos> Lancamentos { get; set; }
+        public DbSet<Curso> Curso { get; set; }
+        public DbSet<Disciplina> Disciplina { get; set; }
+        public DbSet<DiscTurma> DiscTurma { get; set; }
+        public DbSet<Turma> Turma { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

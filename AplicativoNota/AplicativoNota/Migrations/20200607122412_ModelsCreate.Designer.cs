@@ -9,14 +9,130 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AplicativoNota.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200606152448_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200607122412_ModelsCreate")]
+    partial class ModelsCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+
+            modelBuilder.Entity("Data.Models.Aluno", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CursoId");
+
+                    b.Property<int>("MatriculaId");
+
+                    b.Property<string>("Nome");
+
+                    b.Property<int?>("TurmaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CursoId");
+
+                    b.HasIndex("TurmaId");
+
+                    b.ToTable("Aluno");
+                });
+
+            modelBuilder.Entity("Data.Models.Curso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DescDisciplina");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Curso");
+                });
+
+            modelBuilder.Entity("Data.Models.DiscTurma", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DisciplinaId");
+
+                    b.Property<int>("TurmaId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("DisciplinaId");
+
+                    b.HasIndex("TurmaId");
+
+                    b.ToTable("DiscTurma");
+                });
+
+            modelBuilder.Entity("Data.Models.Disciplina", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("CursoId");
+
+                    b.Property<string>("DescDisciplina");
+
+                    b.Property<int?>("Professorid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CursoId");
+
+                    b.HasIndex("Professorid");
+
+                    b.ToTable("Disciplina");
+                });
+
+            modelBuilder.Entity("Data.Models.Lancamentos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AlunoId");
+
+                    b.Property<string>("DescLancamento");
+
+                    b.Property<int>("ProfessorId");
+
+                    b.Property<string>("Tipo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Lancamentos");
+                });
+
+            modelBuilder.Entity("Data.Models.Matricula", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Tipo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Matricula");
+                });
+
+            modelBuilder.Entity("Data.Models.Professor", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MatriculaId");
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Professor");
+                });
 
             modelBuilder.Entity("Data.Models.Role", b =>
                 {
@@ -41,6 +157,22 @@ namespace AplicativoNota.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
+            modelBuilder.Entity("Data.Models.Turma", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CursoId");
+
+                    b.Property<int>("DisciplinaId");
+
+                    b.Property<int>("ProfessorId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Turma");
+                });
+
             modelBuilder.Entity("Data.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -60,7 +192,7 @@ namespace AplicativoNota.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<long>("Matricula");
+                    b.Property<int>("MatriculaId");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -172,6 +304,42 @@ namespace AplicativoNota.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Data.Models.Aluno", b =>
+                {
+                    b.HasOne("Data.Models.Curso")
+                        .WithMany("alunos")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.Models.Turma")
+                        .WithMany("alunos")
+                        .HasForeignKey("TurmaId");
+                });
+
+            modelBuilder.Entity("Data.Models.DiscTurma", b =>
+                {
+                    b.HasOne("Data.Models.Disciplina")
+                        .WithMany("discTurmas")
+                        .HasForeignKey("DisciplinaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.Models.Turma")
+                        .WithMany("discTurmas")
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Data.Models.Disciplina", b =>
+                {
+                    b.HasOne("Data.Models.Curso")
+                        .WithMany("disciplinas")
+                        .HasForeignKey("CursoId");
+
+                    b.HasOne("Data.Models.Professor")
+                        .WithMany("disciplinas")
+                        .HasForeignKey("Professorid");
                 });
 
             modelBuilder.Entity("Data.Models.UserRole", b =>

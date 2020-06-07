@@ -7,7 +7,7 @@ namespace Data.Models
 {
     public class User : IdentityUser<int>
     {
-        public long Matricula { get; set; }
+        public int MatriculaId { get; set; }
         public List<UserRole> UserRoles { get; set; }
     }
 }
