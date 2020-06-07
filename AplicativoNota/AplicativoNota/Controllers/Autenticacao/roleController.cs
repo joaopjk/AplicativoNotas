@@ -22,7 +22,7 @@ namespace AplicativoNota.Controllers.Autenticacao
         }
         [HttpGet]
         //[AllowAnonymous]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Get()
         {
             return Ok(new

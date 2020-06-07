@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using AutoMapper;
 using Data.Models;
@@ -34,6 +37,27 @@ namespace AplicativoNota
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aplicativo Notas", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+
+                    In = ParameterLocation.Header,
+                    Description = "Autenticação Bearer",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                       {
+                         new OpenApiSecurityScheme
+                         {
+                           Reference = new OpenApiReference
+                           {
+                             Type = ReferenceType.SecurityScheme,
+                             Id = "Bearer"
+                           }
+                          },
+                          new string[] { }
+                        }
+                      });
             });
 
             string dbConnString = Configuration.GetConnectionString("DefaultConnection");
@@ -65,7 +89,7 @@ namespace AplicativoNota
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                        .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
