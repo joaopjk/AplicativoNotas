@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AplicativoNota.Migrations
 {
-    public partial class ModelsCreate : Migration
+    public partial class ModelsUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,8 +69,10 @@ namespace AplicativoNota.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DescLancamento = table.Column<string>(nullable: true),
+                    Nota = table.Column<string>(nullable: true),
+                    NotaTotal = table.Column<string>(nullable: true),
                     AlunoId = table.Column<int>(nullable: false),
-                    ProfessorId = table.Column<int>(nullable: false),
+                    DisciplinaId = table.Column<int>(nullable: false),
                     Tipo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AplicativoNota.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200607124518_ModelsCreate")]
-    partial class ModelsCreate
+    [Migration("20200607225841_ModelsUpdate")]
+    partial class ModelsUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,7 +99,11 @@ namespace AplicativoNota.Migrations
 
                     b.Property<string>("DescLancamento");
 
-                    b.Property<int>("ProfessorId");
+                    b.Property<int>("DisciplinaId");
+
+                    b.Property<string>("Nota");
+
+                    b.Property<string>("NotaTotal");
 
                     b.Property<string>("Tipo");
 

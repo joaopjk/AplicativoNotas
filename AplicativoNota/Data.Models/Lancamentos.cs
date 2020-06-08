@@ -9,8 +9,10 @@ namespace Data.Models
         [Key]
         public int Id { get; set; }
         public string DescLancamento { get; set; }
+        public string Nota { get; set; }
+        public string NotaTotal { get; set; }
         public int AlunoId { get; set; }
-        public int ProfessorId { get; set; }
+        public int DisciplinaId { get; set; }
         public string Tipo { get; set; }
     }
 }

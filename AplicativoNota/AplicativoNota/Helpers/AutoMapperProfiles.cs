@@ -10,7 +10,6 @@ namespace AplicativoNota.Helpers
         {
             CreateMap<User, AutenticaoRequest>().ReverseMap();
             CreateMap<User, LoginRequest>().ReverseMap();
-            
         }
     }
 }

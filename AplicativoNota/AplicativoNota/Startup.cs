@@ -39,7 +39,6 @@ namespace AplicativoNota
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aplicativo Notas", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-
                     In = ParameterLocation.Header,
                     Description = "Autenticação Bearer",
                     Name = "Authorization",
@@ -108,6 +107,13 @@ namespace AplicativoNota
 
             services.AddAutoMapper();
             services.AddCors();
+            #region Repository
+            services.AddScoped<IAlunoRepository, AlunoRepository>();
+            services.AddScoped<IProfessorRepository, ProfessorRepository>();
+            services.AddScoped<IMatriculaRepository, MatriculaRepository>();
+            services.AddScoped<ILancamentosRepository, LancamentosRepository>();
+            services.AddScoped<ICursoRepository, CursoRepository>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -97,7 +97,11 @@ namespace AplicativoNota.Migrations
 
                     b.Property<string>("DescLancamento");
 
-                    b.Property<int>("ProfessorId");
+                    b.Property<int>("DisciplinaId");
+
+                    b.Property<string>("Nota");
+
+                    b.Property<string>("NotaTotal");
 
                     b.Property<string>("Tipo");
 

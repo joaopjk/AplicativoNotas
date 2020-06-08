@@ -23,6 +23,7 @@
     <ProjectReference Include="..\Api.DTO\Api.DTO.csproj" />
     <ProjectReference Include="..\Data.Models\Data.Models.csproj" />
     <ProjectReference Include="..\Data.Repository\Data.Repository.csproj" />
+    <ProjectReference Include="..\Util.Utilitarios\Util.Utilitarios.csproj" />
   </ItemGroup>
 
 </Project>
