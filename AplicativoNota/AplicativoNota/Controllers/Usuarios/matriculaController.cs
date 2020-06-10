@@ -63,6 +63,10 @@ namespace AplicativoNota.Controllers.Usuarios
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Request);
+                }
                 _repo.Add(Request);
                 if(await _repo.SaveChangesAsync())
                 {
@@ -81,6 +85,10 @@ namespace AplicativoNota.Controllers.Usuarios
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Request);
+                }
                 var matricula = await _repo.GetMatriculaById(Request.Id);
                 if(matricula == null)
                 {

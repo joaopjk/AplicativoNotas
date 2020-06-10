@@ -64,6 +64,10 @@ namespace AplicativoNota.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Request);
+                }
                 _repo.Add(Request);
                 if(await _repo.SaveChangesAsync())
                 {
@@ -82,6 +86,10 @@ namespace AplicativoNota.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Request);
+                }
                 var lancamentos = await _repo.GetLancamentosById(Request.AlunoId, Request.DisciplinaId);
                 if(lancamentos == null)
                 {

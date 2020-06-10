@@ -62,6 +62,10 @@ namespace AplicativoNota.Controllers.Controle
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Request);
+                }
                 _repo.Add(Request);
                 if (await _repo.SaveChangesAsync())
                 {
@@ -80,6 +84,10 @@ namespace AplicativoNota.Controllers.Controle
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Request);
+                }
                 var discturma = await _repo.GetDiscTurmaById(Request.Id);
                 if (discturma == null)
                 {
