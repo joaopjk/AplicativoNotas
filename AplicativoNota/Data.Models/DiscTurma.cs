@@ -7,7 +7,7 @@ namespace Data.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         public int DisciplinaId { get; set; }
         public int TurmaId { get; set; }
     }

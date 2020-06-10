@@ -113,6 +113,8 @@ namespace AplicativoNota
             services.AddScoped<IMatriculaRepository, MatriculaRepository>();
             services.AddScoped<ILancamentosRepository, LancamentosRepository>();
             services.AddScoped<ICursoRepository, CursoRepository>();
+            services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
+            services.AddScoped<ITurmaRepository, TurmaRepository>();
             #endregion
         }
 
