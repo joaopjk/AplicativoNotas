@@ -36,7 +36,6 @@ namespace Data.Repository
                         .HasForeignKey(ur => ur.UserId)
                         .IsRequired();
             });
-
         }
     }
 }

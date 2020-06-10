@@ -136,6 +136,7 @@ namespace AplicativoNota
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoAPI V1");
             });
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

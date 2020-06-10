@@ -13,7 +13,7 @@ namespace AplicativoNota.Controllers
     {
         // GET api/values
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
@@ -21,7 +21,7 @@ namespace AplicativoNota.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult<string> Get(int id)
         {
             return "value";
@@ -29,21 +29,21 @@ namespace AplicativoNota.Controllers
 
         // POST api/values
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         public void Post([FromBody] string value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public void Delete(int id)
         {
         }

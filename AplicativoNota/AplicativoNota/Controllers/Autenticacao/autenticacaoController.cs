@@ -36,7 +36,7 @@ namespace AplicativoNota.Controllers.Autenticacao
             _mapper = mapper;
         }
         [HttpGet("GetUser")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> GetUser(AutenticaoRequest userDto)
         {
             return Ok(userDto);
