@@ -107,6 +107,7 @@ namespace AplicativoNota
 
             services.AddAutoMapper();
             services.AddCors();
+
             #region Repository
             services.AddScoped<IAlunoRepository, AlunoRepository>();
             services.AddScoped<IProfessorRepository, ProfessorRepository>();
@@ -138,6 +139,7 @@ namespace AplicativoNota
             });
             app.UseAuthentication();
             app.UseHttpsRedirection();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
         }
     }
