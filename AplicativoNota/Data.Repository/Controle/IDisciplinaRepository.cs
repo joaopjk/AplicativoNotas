@@ -13,6 +13,6 @@ namespace Data.Repository
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
         Task<Disciplina[]> GetAllDisciplina();
-        Task<Disciplina> GetDisciplinaById(int id);
+        Task<Disciplina[]> GetDisciplinaById(int id);
     }
 }

@@ -57,5 +57,14 @@ namespace Data.Repository
                 .Where(p => p.CursoId == Id);
             return await query.ToArrayAsync();
         }
+
+        public async Task<Aluno[]> GetAlunosByDisiciplna(int CursoId, int DisciplinaId)
+        {
+            var query = from a in _dataContext.Aluno
+                        join t in _dataContext.Turma on a.Id equals t.AlunoId
+                        where t.DisciplinaId == DisciplinaId
+                        select a;
+            return await query.ToArrayAsync();
+        }
     }
 }

@@ -88,7 +88,7 @@ namespace AplicativoNota.Controllers.Usuarios
                 {
                     return BadRequest(Request);
                 }
-                var professor = _repo.GetProfessorById(Request.id);
+                var professor = _repo.GetProfessorById(Request.Id);
                 if(professor == null)
                 {
                     return NotFound(MSG.NaoExisteProfessor);

@@ -8,9 +8,8 @@ namespace Data.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
-        public List<Disciplina> disciplinas { get; }
         public int MatriculaId { get; set; }
     }
 }

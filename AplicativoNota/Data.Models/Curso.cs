@@ -10,7 +10,5 @@ namespace Data.Models
         [Key]
         public int Id { get; set; }
         public string DescDisciplina { get; set; }
-        public List<Aluno> alunos { get; }
-        public List<Disciplina> disciplinas { get; }
     }
 }

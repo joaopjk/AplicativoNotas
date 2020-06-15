@@ -10,6 +10,6 @@ namespace Data.Repository
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
         Task<Turma[]> GetAllTurmas();
-        Task<Turma> GetTurmaById(int id);
+        Task<Turma[]> GetTurmaById(int id);
     }
 }

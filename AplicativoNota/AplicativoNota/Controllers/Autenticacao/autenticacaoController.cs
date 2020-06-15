@@ -77,7 +77,8 @@ namespace AplicativoNota.Controllers.Autenticacao
                     return Ok(new
                     {
                         token = GenerateIwtToken(appUser).Result,
-                        user = userReturn
+                        user = userReturn,
+                        appUser.MatriculaId
                     });
                 }
                 return Unauthorized();

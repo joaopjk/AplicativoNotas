@@ -9,10 +9,9 @@ namespace Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
+        public string Nome { get; set; }
         public int CursoId { get; set; }
-        public int ProfessorId { get; set; }
         public int DisciplinaId { get; set; }
-        public List<Aluno> alunos { get; }
-        public List<DiscTurma> discTurmas { get; }
+        public int AlunoId { get; set; }
     }
 }

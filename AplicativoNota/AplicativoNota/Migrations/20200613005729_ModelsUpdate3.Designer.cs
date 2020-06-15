@@ -3,14 +3,16 @@ using System;
 using Data.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AplicativoNota.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200613005729_ModelsUpdate3")]
+    partial class ModelsUpdate3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,8 +159,6 @@ namespace AplicativoNota.Migrations
                     b.Property<int>("CursoId");
 
                     b.Property<int>("DisciplinaId");
-
-                    b.Property<string>("Nome");
 
                     b.HasKey("Id");
 

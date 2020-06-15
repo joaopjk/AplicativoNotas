@@ -39,12 +39,12 @@ namespace Data.Repository
             return await query.ToArrayAsync();
         }
 
-        public async Task<Disciplina> GetDisciplinaById(int id)
+        public async Task<Disciplina[]> GetDisciplinaById(int id)
         {
             IQueryable<Disciplina> query = _dataContext.Disciplina;
             query = query.AsNoTracking()
-                .Where(p => p.Id == id);
-            return await query.FirstOrDefaultAsync();
+                .Where(p => p.ProfessorId == id);
+            return await query.ToArrayAsync();
         }
     }
 }

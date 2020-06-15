@@ -11,6 +11,7 @@ namespace Data.Repository
         Task<Aluno[]> GetAllAlunos();
         Task<Aluno> GetAlunosById(int id);
         Task<Aluno[]> GetAlunosByCurso(int Id);
+        Task<Aluno[]> GetAlunosByDisiciplna(int CursoId, int DisciplinaId);
         Task<bool> SaveChangesAsync();
     }
 }

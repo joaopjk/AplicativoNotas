@@ -46,7 +46,7 @@ namespace Data.Repository
         {
             IQueryable<Professor> query = _dataContext.Professor;
             query = query.AsNoTracking()
-                .Where(p => p.id == id);
+                .Where(p => p.Id == id);
             return await query.FirstOrDefaultAsync();
         }
     }

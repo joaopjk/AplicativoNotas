@@ -54,5 +54,21 @@ namespace Data.Repository
                 .Where(p => p.Tipo == Tipo);
             return await query.ToArrayAsync();
         }
+
+        public async Task<Lancamentos[]> getLancamentosByDisciplinaId(int DisciplinaId)
+        {
+            IQueryable<Lancamentos> query = _dataContext.Lancamentos;
+            query = query.AsNoTracking()
+                .Where(p => p.DisciplinaId == DisciplinaId);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Lancamentos> GetLancamentosById(int Id)
+        {
+            IQueryable<Lancamentos> query = _dataContext.Lancamentos;
+            query = query.AsNoTracking()
+                .Where(p => p.Id == Id);
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

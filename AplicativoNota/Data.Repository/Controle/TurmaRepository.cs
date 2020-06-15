@@ -42,12 +42,14 @@ namespace Data.Repository
             return await query.ToArrayAsync();
         }
 
-        public async Task<Turma> GetTurmaById(int id)
+        public async Task<Turma[]> GetTurmaById(int id)
         {
             IQueryable<Turma> query = _dataContext.Turma;
             query = query.AsNoTracking()
-                .Where(p => p.Id == id);
-            return await query.FirstOrDefaultAsync();
+                .Where(p => p.DisciplinaId == id)
+                .GroupBy( p => new { p.CursoId,p.DisciplinaId })
+                .Select(g => g.FirstOrDefault());
+            return await query.ToArrayAsync();
         }
     }
 }

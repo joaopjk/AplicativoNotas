@@ -10,6 +10,7 @@ namespace Data.Models
         [Key]
         public int Id { get; set; }
         public string DescDisciplina { get; set; }
-        public List<DiscTurma> discTurmas { get; }
+        public int ProfessorId { get; set; }
+        public int TurmaId { get; set; }
     }
 }

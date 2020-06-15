@@ -29,7 +29,25 @@ namespace AplicativoNota.Controllers
             try
             {
                 var lancamentos = await _repo.GetLancamentosById(AlunoId, DisciplinaId);
-                if(lancamentos.Length == 0)
+                if (lancamentos.Length == 0)
+                {
+                    return NotFound(MSG.NaoExisteLancamento);
+                }
+                return Ok(lancamentos);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status501NotImplemented, MSG.BancoDadosFalhou);
+            }
+        }
+        [HttpGet("getLancamentosByDisciplinaId")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get(int DisciplinaId)
+        {
+            try
+            {
+                var lancamentos = await _repo.getLancamentosByDisciplinaId(DisciplinaId);
+                if (lancamentos.Length == 0)
                 {
                     return NotFound(MSG.NaoExisteLancamento);
                 }
@@ -42,11 +60,11 @@ namespace AplicativoNota.Controllers
         }
         [HttpGet("GetAllNotasTipo")]
         [AllowAnonymous]
-        public async Task<IActionResult> Get(int AlunoId, int DisciplinaId,string Tipo)
+        public async Task<IActionResult> Get(int AlunoId, int DisciplinaId, string Tipo)
         {
             try
             {
-                var lancamentos = await _repo.GetLancamentosByIdeTipo(AlunoId, DisciplinaId,Tipo.Trim());
+                var lancamentos = await _repo.GetLancamentosByIdeTipo(AlunoId, DisciplinaId, Tipo.Trim());
                 if (lancamentos.Length == 0)
                 {
                     return NotFound(MSG.NaoExisteLancamento);
@@ -69,7 +87,7 @@ namespace AplicativoNota.Controllers
                     return BadRequest(Request);
                 }
                 _repo.Add(Request);
-                if(await _repo.SaveChangesAsync())
+                if (await _repo.SaveChangesAsync())
                 {
                     return Created($"/api/[controler]/Lancamentos{Request.Id}", Request);
                 }
@@ -80,9 +98,9 @@ namespace AplicativoNota.Controllers
             }
             return BadRequest();
         }
-        [HttpPut]
+        [HttpPut()]
         [AllowAnonymous]
-        public async Task<IActionResult> Put(Lancamentos Request)
+        public async Task<IActionResult> Put([FromBody]Lancamentos Request)
         {
             try
             {
@@ -90,18 +108,18 @@ namespace AplicativoNota.Controllers
                 {
                     return BadRequest(Request);
                 }
-                var lancamentos = await _repo.GetLancamentosById(Request.AlunoId, Request.DisciplinaId);
+                var lancamentos = await _repo.GetLancamentosById(Request.Id);
                 if(lancamentos == null)
                 {
                     return NotFound(MSG.NaoExisteLancamentoProcurado);
                 }
-                _repo.Update(lancamentos);
+                _repo.Update(Request);
                 if(await _repo.SaveChangesAsync())
                 {
                     return Created($"/api/[controler]/Lancamentos{Request.Id}", Request);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status501NotImplemented, MSG.BancoDadosFalhou);
             }

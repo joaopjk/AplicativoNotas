@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AplicativoNota.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200607225841_ModelsUpdate")]
-    partial class ModelsUpdate
+    [Migration("20200613011014_ModelsUpdate4")]
+    partial class ModelsUpdate4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,13 +29,7 @@ namespace AplicativoNota.Migrations
 
                     b.Property<string>("Nome");
 
-                    b.Property<int?>("TurmaId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("TurmaId");
 
                     b.ToTable("Aluno");
                 });
@@ -54,18 +48,14 @@ namespace AplicativoNota.Migrations
 
             modelBuilder.Entity("Data.Models.DiscTurma", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DisciplinaId");
 
                     b.Property<int>("TurmaId");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("DisciplinaId");
-
-                    b.HasIndex("TurmaId");
+                    b.HasKey("Id");
 
                     b.ToTable("DiscTurma");
                 });
@@ -75,27 +65,25 @@ namespace AplicativoNota.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CursoId");
-
                     b.Property<string>("DescDisciplina");
 
-                    b.Property<int?>("Professorid");
+                    b.Property<int>("ProfessorId");
+
+                    b.Property<int>("TurmaId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("Professorid");
 
                     b.ToTable("Disciplina");
                 });
 
             modelBuilder.Entity("Data.Models.Lancamentos", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AlunoId");
+
+                    b.Property<DateTime>("DataLancamento");
 
                     b.Property<string>("DescLancamento");
 
@@ -126,14 +114,14 @@ namespace AplicativoNota.Migrations
 
             modelBuilder.Entity("Data.Models.Professor", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("MatriculaId");
 
                     b.Property<string>("Nome");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Professor");
                 });
@@ -166,11 +154,13 @@ namespace AplicativoNota.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AlunoId");
+
                     b.Property<int>("CursoId");
 
                     b.Property<int>("DisciplinaId");
 
-                    b.Property<int>("ProfessorId");
+                    b.Property<string>("Nome");
 
                     b.HasKey("Id");
 
@@ -308,42 +298,6 @@ namespace AplicativoNota.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Data.Models.Aluno", b =>
-                {
-                    b.HasOne("Data.Models.Curso")
-                        .WithMany("alunos")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Data.Models.Turma")
-                        .WithMany("alunos")
-                        .HasForeignKey("TurmaId");
-                });
-
-            modelBuilder.Entity("Data.Models.DiscTurma", b =>
-                {
-                    b.HasOne("Data.Models.Disciplina")
-                        .WithMany("discTurmas")
-                        .HasForeignKey("DisciplinaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Data.Models.Turma")
-                        .WithMany("discTurmas")
-                        .HasForeignKey("TurmaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Data.Models.Disciplina", b =>
-                {
-                    b.HasOne("Data.Models.Curso")
-                        .WithMany("disciplinas")
-                        .HasForeignKey("CursoId");
-
-                    b.HasOne("Data.Models.Professor")
-                        .WithMany("disciplinas")
-                        .HasForeignKey("Professorid");
                 });
 
             modelBuilder.Entity("Data.Models.UserRole", b =>

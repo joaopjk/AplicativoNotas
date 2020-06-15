@@ -39,6 +39,24 @@ namespace AplicativoNota.Controllers.Usuarios
                 return this.StatusCode(StatusCodes.Status501NotImplemented, MSG.BancoDadosFalhou);
             }
         }
+        [HttpGet("GetAlunosByDisiciplna")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAlunosByDisiciplna(int CursoId,int DisciplinaId)
+        {
+            try
+            {
+               var results = await _repo.GetAlunosByDisiciplna(CursoId, DisciplinaId);
+                if (results == null)
+                {
+                    return NotFound(MSG.NaoExisteAluno);
+                }
+                return Ok(results);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status501NotImplemented, MSG.BancoDadosFalhou);
+            }
+        }
         [HttpGet("{Id}")]
         [AllowAnonymous]
         public async Task<IActionResult> Get(int Id)
