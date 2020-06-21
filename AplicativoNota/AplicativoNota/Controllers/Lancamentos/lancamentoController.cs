@@ -82,6 +82,7 @@ namespace AplicativoNota.Controllers
         {
             try
             {
+                Request.Id = _repo.MaxLancamento();
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(Request);

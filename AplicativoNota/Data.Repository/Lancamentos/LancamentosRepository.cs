@@ -28,7 +28,7 @@ namespace Data.Repository
 
         public async Task<bool> SaveChangesAsync()
         {
-            return await(_dataContext.SaveChangesAsync()) > 0;
+            return await (_dataContext.SaveChangesAsync()) > 0;
         }
 
         public void Update<T>(T entity) where T : class
@@ -69,6 +69,11 @@ namespace Data.Repository
             query = query.AsNoTracking()
                 .Where(p => p.Id == Id);
             return await query.FirstOrDefaultAsync();
+        }
+        public int MaxLancamento()
+        {
+            int aux = _dataContext.Lancamentos.Select(p => p.Id).DefaultIfEmpty(0).Max();
+            return aux;
         }
     }
 }

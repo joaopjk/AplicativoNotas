@@ -16,5 +16,6 @@ namespace Data.Repository
         Task<Lancamentos[]> GetLancamentosById(int AlunoId,int DisciplinaId);
         Task<Lancamentos[]> GetLancamentosByIdeTipo(int AlunoId, int DisciplinaId,string Tipo);
         Task<Lancamentos[]> getLancamentosByDisciplinaId(int DisciplinaId);
+        int MaxLancamento();
     }
 }
